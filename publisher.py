@@ -5,10 +5,10 @@ import json
 import paho.mqtt.publish as publish
 
 # MQTT Settings
-MQTT_Broker = "hairdresser.cloudmqtt.com"
-MQTT_Port = 17214
-USERNAME = "ixyzuhmh"
-PASSWORD = "XNfCz_qhTNOi"
+MQTT_Broker = "broker.hivemq.com"
+MQTT_Port = 1883
+# USERNAME = "ixyzuhmh"
+# PASSWORD = "XNfCz_qhTNOi"
 SAMPLERATE = 10
 
 # initial network bytes stats
@@ -62,8 +62,8 @@ def publishOnTopic(topic, data):
     publish.single(topic,
                    data,
                    hostname=MQTT_Broker,
-                   port=MQTT_Port,
-                   auth={'username': USERNAME, 'password': PASSWORD})
+                   port=MQTT_Port
+                   )
 
 
 while True:

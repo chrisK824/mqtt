@@ -13,6 +13,7 @@ zoomOutFormat = mdates.DateFormatter('%d/%m-%H:%M')
 zoomInFormat = mdates.DateFormatter('%H:%M:%S')
 graphCounter = 1
 
+
 def graph_data(metric):
     global graphCounter
     c.execute('SELECT Timestamp, Value FROM ' + metric)
@@ -23,17 +24,16 @@ def graph_data(metric):
         dates.append(parser.parse(row[0]))
         values.append(row[1])
     plt.subplot(4, 1, graphCounter)
-    plt.plot_date(dates,values,'-', linewidth=1.0)
+    plt.plot_date(dates, values, '-', linewidth=1.0)
     plt.xlabel('time of day', fontsize=14)
     plt.ylabel(metric, fontsize=8)
     plt.gca().xaxis.set_major_formatter(zoomOutFormat
-    )
+                                        )
     plt.gca().xaxis.set_minor_formatter(zoomInFormat)
     datemin = np.datetime64(dates[0], 'D')
     datemax = np.datetime64(dates[-1], 'D') + np.timedelta64(1, 'D')
     plt.xlim(datemin, datemax)
     graphCounter = graphCounter + 1
-
 
 
 graph_data('cpu')
